@@ -1,4 +1,5 @@
 // DESAFIO: Sistema de Notificações Multi-Plataforma
+// EXECUÇÃO: Este arquivo é executado via 'dotnet run' (chamado pelo Program.cs)
 // PROBLEMA: Um aplicativo precisa exibir notificações em diferentes plataformas (Web, Mobile, Desktop)
 // com diferentes tipos de conteúdo (Texto, Imagem, Vídeo). O código atual cria uma explosão de classes
 // combinando cada tipo de notificação com cada plataforma
