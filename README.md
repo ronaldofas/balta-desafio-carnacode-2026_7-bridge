@@ -18,15 +18,49 @@ Neste processo eu aprendi:
 Um aplicativo precisa exibir notificações em diferentes plataformas (Web, Mobile, Desktop) com diferentes tipos de conteúdo (Texto, Imagem, Vídeo). 
 O código atual cria uma explosão de classes combinando cada tipo de notificação com cada plataforma.
 
-## Solução
+## Solução: Bridge Pattern
 O problema de explosão de classes foi resolvido utilizando o padrão **Bridge**. Separamos a abstração (tipo de notificação) da implementação (plataforma de renderização).
 
-### Estrutura
-- **Abstração**: `Notification` (e subclasses `TextNotification`, `ImageNotification`, `VideoNotification`)
-- **Implementação**: `IPlatformRenderer` (e classes `WebRenderer`, `MobileRenderer`, `DesktopRenderer`)
-- **Ponte**: A classe `Notification` recebe um `IPlatformRenderer` no construtor.
+### Estrutura do Projeto
+```
+src/
+├── Interfaces/
+│   └── IPlatformRenderer.cs    # Contrato para implementações de plataforma
+├── Notifications/
+│   ├── Notification.cs         # Abstração (Bridge)
+│   ├── TextNotification.cs     # Abstração Refinada (Texto)
+│   ├── ImageNotification.cs    # Abstração Refinada (Imagem)
+│   └── VideoNotification.cs    # Abstração Refinada (Vídeo)
+├── Renderers/
+│   ├── WebRenderer.cs          # Implementação Concreta (Web)
+│   ├── MobileRenderer.cs       # Implementação Concreta (Mobile)
+│   └── DesktopRenderer.cs      # Implementação Concreta (Desktop)
+├── Challenge.cs                # Código Legado (mantido para comparação)
+├── Program.cs                  # Ponto de Entrada
+└── DesignPatternChallenge.csproj
+```
 
-Com isso, reduzimos a complexidade de 9 classes para 6 e desacoplamos as hierarquias, facilitando a extensão do sistema.
+### Classes Criadas
+- **Abstração (`Notification`)**: Define a interface de alto nível e mantém uma referência (`_renderer`) para o objeto de implementação.
+- **Implementação (`IPlatformRenderer`)**: Define a interface para as classes de implementação.
+- **Refinamentos**: `TextNotification`, `ImageNotification`, `VideoNotification` estendem a abstração.
+- **Implementações Concretas**: `WebRenderer`, `MobileRenderer`, `DesktopRenderer` implementam a interface de plataforma.
+
+### Etapas de Refatoração
+1. **Criação do Projeto**: Configuração do `.csproj` para .NET 10.
+2. **Interface de Implementação**: Criação de `IPlatformRenderer`.
+3. **Implementações Concretas**: Criação dos renderers para Web, Mobile e Desktop.
+4. **Abstração**: Criação da classe base `Notification` recebendo o renderer no construtor.
+5. **Refinamento da Abstração**: Criação das classes de notificação específicas.
+6. **Integração**: Criação do `Program.cs` demonstrando o uso do padrão e mantendo o legado acessível.
+
+### Como Executar
+```bash
+cd src
+dotnet run
+```
+A execução exibirá primeiro as notificações utilizando o novo padrão **Bridge**, seguido pela execução do código legado para fins de comparação.
+
 
 ## Sobre o CarnaCode 2026
 O desafio **CarnaCode 2026** consiste em implementar todos os 23 padrões de projeto (Design Patterns) em cenários reais. Durante os 23 desafios desta jornada, os participantes são submetidos ao aprendizado e prática na idetinficação de códigos não escaláveis e na solução de problemas utilizando padrões de mercado.
