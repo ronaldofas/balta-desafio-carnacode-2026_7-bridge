@@ -21,6 +21,33 @@ O código atual cria uma explosão de classes combinando cada tipo de notificaç
 ## Solução: Bridge Pattern
 O problema de explosão de classes foi resolvido utilizando o padrão **Bridge**. Separamos a abstração (tipo de notificação) da implementação (plataforma de renderização).
 
+### Diagrama de Classes
+```mermaid
+classDiagram
+    class Notification {
+        <<abstract>>
+        #IPlatformRenderer Renderer
+        +Render()*
+    }
+    
+    class IPlatformRenderer {
+        <<interface>>
+        +RenderText(title, content)
+        +RenderImage(title, content, imageUrl)
+        +RenderVideo(title, content, videoUrl)
+    }
+
+    Notification o-- IPlatformRenderer : Bridge
+    
+    Notification <|-- TextNotification
+    Notification <|-- ImageNotification
+    Notification <|-- VideoNotification
+    
+    IPlatformRenderer <|.. WebRenderer
+    IPlatformRenderer <|.. MobileRenderer
+    IPlatformRenderer <|.. DesktopRenderer
+```
+
 ### Estrutura do Projeto
 ```
 src/
