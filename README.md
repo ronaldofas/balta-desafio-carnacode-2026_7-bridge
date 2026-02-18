@@ -18,6 +18,16 @@ Neste processo eu aprendi:
 Um aplicativo precisa exibir notificações em diferentes plataformas (Web, Mobile, Desktop) com diferentes tipos de conteúdo (Texto, Imagem, Vídeo). 
 O código atual cria uma explosão de classes combinando cada tipo de notificação com cada plataforma.
 
+## Solução
+O problema de explosão de classes foi resolvido utilizando o padrão **Bridge**. Separamos a abstração (tipo de notificação) da implementação (plataforma de renderização).
+
+### Estrutura
+- **Abstração**: `Notification` (e subclasses `TextNotification`, `ImageNotification`, `VideoNotification`)
+- **Implementação**: `IPlatformRenderer` (e classes `WebRenderer`, `MobileRenderer`, `DesktopRenderer`)
+- **Ponte**: A classe `Notification` recebe um `IPlatformRenderer` no construtor.
+
+Com isso, reduzimos a complexidade de 9 classes para 6 e desacoplamos as hierarquias, facilitando a extensão do sistema.
+
 ## Sobre o CarnaCode 2026
 O desafio **CarnaCode 2026** consiste em implementar todos os 23 padrões de projeto (Design Patterns) em cenários reais. Durante os 23 desafios desta jornada, os participantes são submetidos ao aprendizado e prática na idetinficação de códigos não escaláveis e na solução de problemas utilizando padrões de mercado.
 
