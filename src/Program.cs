@@ -1,3 +1,4 @@
+using DesignPatternChallenge;
 using DesignPatternChallenge.Notifications;
 using DesignPatternChallenge.Renderers;
 
@@ -33,3 +34,7 @@ Console.WriteLine("✓ Abstração (Notificação) separada da Implementação (
 Console.WriteLine("✓ 3 Tipos + 3 Plataformas = 6 Classes (em vez de 9)");
 Console.WriteLine("✓ Adicionar nova plataforma não exige mudar as notificações");
 Console.WriteLine("✓ Adicionar novo tipo não exige mudar as plataformas");
+
+Console.WriteLine("\n--------------------------------------------------\n");
+Console.WriteLine("Executando versão legado para comparação (Opcional):");
+LegacySystem.Run();
